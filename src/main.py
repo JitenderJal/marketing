@@ -34,7 +34,6 @@ def makeCSV(price_list = [], persent=10, no_of_products = 5, region=1):
                 temp.append(str(doc['region']))
             print str(price)+','+','.join(temp)+'\n'
             outFile.write(str(price)+','+','.join(temp)+'\n')
-            break
         outFile.close()
 
 def AllRegion():
