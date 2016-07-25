@@ -7,7 +7,7 @@ def makeCSV(price_list = [], persent=10, no_of_products = 5, region=1, username 
     if len(price_list) == 0:
         print "Enter price list"
     else:
-        solr = 'http://deploy.reviews42.com:9010/solr/collection1/select?q=*:*&fq=online_lowest_price:[{0} TO {1}]&'
+        solr = 'http://localhost:8983/solr/collection1/select?q=*:*&fq=online_lowest_price:[{0} TO {1}]&'
         require_fields = {1:'title',2:'price',3:'product_id',4:'region'}
         others = '&sort=online_lowest_price desc&wt=json&rows='+str(no_of_products)
         script_path = os.path.abspath(__file__)  # i.e. /path/to/dir/foobar.py
@@ -37,7 +37,7 @@ def makeCSV(price_list = [], persent=10, no_of_products = 5, region=1, username 
         outFile.close()
 
 def AllRegion(username = "", password = ""):
-    solrQuery = 'http://deploy.reviews42.com:9010/solr/collection1/select?q=*:*&facet=true&facet.field=region&facet.mincount=-1&wt=json'
+    solrQuery = 'http://localhost:8983/solr/collection1/select?q=*:*&facet=true&facet.field=region&facet.mincount=-1&wt=json'
     regions = json.loads(requests.get(url=solrQuery, auth=(username, password)).text)['facet_counts']['facet_fields']['region'][::2]
     return regions
 
